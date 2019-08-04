@@ -18,17 +18,17 @@ receiveSocket = None
 class message:
 	def __init__(self, type=-1, x=-1, y=-1):
 		self.type = type
-		self.x = x;
-		self.y = y;
+		self.x = x
+		self.y = y
 
 class receiver:
 	def __init__(self, addr, port):
 		self.receiveAddr = addr
 		self.receivePort = int(port)
 		self.receiveSocket = socket.socket(socket.AF_INET,
-						socket.SOCK_DGRAM);
+						socket.SOCK_DGRAM)
 		self.receiveSocket.bind((self.receiveAddr,
-					 self.receivePort));
+					 self.receivePort))
 		self.receiveSocket.setblocking(0)
 		return
 
