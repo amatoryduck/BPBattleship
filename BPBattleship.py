@@ -217,6 +217,8 @@ def Draw_Click(point):
     global SHIP_TO_BE_PLACED
     global READY
     if In_E_Board(point) and SHIP_TO_BE_PLACED == 0 and READY:
+        (x, y) = Convert_To_Small(point[0], point[1])
+        SEND.sendMessage(1, x, y)
         c.create_rectangle(point[0], point[1], 
             point[0] + CELL_SIZE, point[1] + CELL_SIZE, fill = HIT_COLOR)
 
