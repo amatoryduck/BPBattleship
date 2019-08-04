@@ -66,6 +66,8 @@ def Recv():
             Update_Fire(m)
         if m.type == 2:
             Update_Hit(m)
+        if m.type == 3:
+            Update_Miss(m)
     
     c.after(1000, Recv)
 
@@ -220,7 +222,6 @@ def Draw_Click(point):
     global READY
     if In_E_Board(point) and SHIP_TO_BE_PLACED == 0 and READY:
         (x, y) = Convert_To_Small(point[0], point[1])
-        print("X {} Y {}".format(x, y))
         SEND.sendMessage(1, x, y)
 
 def Draw_Lines():
