@@ -82,6 +82,7 @@ def Update_Hit(m):
      x + CELL_SIZE, y + CELL_SIZE, fill = HIT_COLOR)
 
 def Update_Miss(m):
+    print("IN MISS")
     x = m.x
     y = m.y
     cell = my_cells[x][y]
@@ -90,8 +91,7 @@ def Update_Miss(m):
     y = y * CELL_SIZE
     c.create_line(x, y,
      x + CELL_SIZE, y + CELL_SIZE, fill = HIT_COLOR)
-    c.create_line(x + CELL_SIZE,
-     x, y + CELL_SIZE, fill = HIT_COLOR)
+    c.create_line(x + CELL_SIZE,y, x, y + CELL_SIZE, fill = HIT_COLOR)
 
 def Update_Fire(msg):
     x = msg.x
