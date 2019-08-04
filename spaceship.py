@@ -19,6 +19,7 @@ BOT_MAP_TOP = WINDOW_WIDTH + OFFSET
 SHIP_TO_BE_PLACED = 4
 READY = False
 RECV = receiver("0.0.0.0", 4556)
+SEND = sender("10.0.0.215", 4556)
 
 my_cells = list()
 e_cells = list()
@@ -46,20 +47,21 @@ class Cell():
 ###############################################################################
 # ALL MESSAGE FUNCTIONS LIVE HERE
 ###############################################################################
-
 def After_Startup():
     global READY
+    SEND.sendMessage(-1, -1, -1)
     if SHIP_TO_BE_PLACED > 0:
         return False
     else:
         READY = True
         c.create_rectangle(0, WINDOW_WIDTH,
      WINDOW_WIDTH, WINDOW_WIDTH + OFFSET, fill = OFFEST_COLOR)
+        c.after(1000, Recv)
         return True
 
 def Recv():
-    print("IN RECV")
-
+    RECV.receivePoll()
+    c.after(1000, Recv)
 
 ###############################################################################
 # ALL MATH FUNCTIONS LIVE HERE
@@ -211,5 +213,5 @@ if __name__=="__main__":
     Draw_Lines()
     Draw_Ships_Left()
     c.bind('<Button-1>', Callback)
-    c.after_idle(Recv)
+    
     tk.mainloop()

@@ -18,8 +18,8 @@ receiveSocket = None
 class message:
 	def __init__(self, typ1=-1, x=-1, y=-1):
 		self.type = 0
-		self.x = 0;
-		self.y = 0;
+		self.x = 0
+		self.y = 0
 
 	def __str__(self):
 		r = ''
@@ -31,9 +31,9 @@ class receiver:
 		self.receiveAddr = addr
 		self.receivePort = int(port)
 		self.receiveSocket = socket.socket(socket.AF_INET,
-						socket.SOCK_DGRAM);
+						socket.SOCK_DGRAM)
 		self.receiveSocket.bind((self.receiveAddr,
-					 self.receivePort));
+					 self.receivePort))
 		self.receiveSocket.setblocking(0)
 		return
 
