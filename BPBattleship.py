@@ -64,8 +64,30 @@ def Recv():
     if m != None:
         if m.type == 1:
             Update_Fire(m)
+        if m.type == 2:
+            Update_Hit(m)
     
     c.after(1000, Recv)
+
+def Update_Hit(m):
+    x = m.x
+    y = m.y
+    cell = my_cells[x][y]
+    x = x * CELL_SIZE
+    y = y * CELL_SIZE
+    c.create_rectangle(x, y, 
+     x + CELL_SIZE, y + CELL_SIZE, fill = HIT_COLOR)
+
+def Update_Miss(m):
+    x = m.x
+    y = m.y
+    cell = my_cells[x][y]
+    x = x * CELL_SIZE
+    y = y * CELL_SIZE
+    c.create_line(x, y,
+     x + CELL_SIZE, y + CELL_SIZE, fill = HIT_COLOR)
+    c.create_line(x + CELL_SIZE,
+     x, y + CELL_SIZE, fill = HIT_COLOR)
 
 def Update_Fire(msg):
     x = msg.x
@@ -76,12 +98,14 @@ def Update_Fire(msg):
     cell.hit = True
     if cell.isShip:
         c.create_rectangle(x, y + BOT_MAP_TOP, 
-        x + CELL_SIZE, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
+         x + CELL_SIZE, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
+        SEND.sendMessage(2, x / CELL_SIZE, y / CELL_SIZE)
     else:
         c.create_line(x, y + BOT_MAP_TOP,
          x + CELL_SIZE, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
         c.create_line(x + CELL_SIZE, y + BOT_MAP_TOP,
          x, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
+        SEND.sendMessage(3, x / CELL_SIZE, y / CELL_SIZE)
 
 ###############################################################################
 # ALL MATH FUNCTIONS LIVE HERE
