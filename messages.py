@@ -16,10 +16,10 @@ receiveSocket = None
 #	4 - You win
 #	5 - I give up
 class message:
-	def __init__(self, typ1=-1, x=-1, y=-1):
-		self.type = 0
-		self.x = 0
-		self.y = 0
+	def __init__(self, type=-1, x=-1, y=-1):
+		self.type = type
+		self.x = x
+		self.y = y 
 
 	def __str__(self):
 		r = ''
@@ -55,9 +55,11 @@ class sender:
 		self.sendSocket = socket.socket(socket.AF_INET,
 						socket.SOCK_DGRAM)
 	
-	def sendMessage(self, type, x=-1, y=-1):
-		m = message(type, x, y)
+	def sendMessage(self, mtype, x=-1, y=-1):
+		print("IN SEND MTPYE = {} X = {} y = {}".format(mtype, x,y))
+		m = message(mtype, x, y)
 		tmp = json.dumps(m.__dict__)
+		print("TMP IS {}".format(tmp))
 		self.sendSocket.sendto(tmp, (self.sendAddr, self.sendPort))
 
 def test1():

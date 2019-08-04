@@ -49,7 +49,7 @@ class Cell():
 ###############################################################################
 def After_Startup():
     global READY
-    SEND.sendMessage(-1, -1, -1)
+    #SEND.sendMessage(-1, -1, -1)
     if SHIP_TO_BE_PLACED > 0:
         return False
     else:
@@ -73,6 +73,7 @@ def Update_Hit(m):
     x = m.x
     y = m.y
     cell = my_cells[x][y]
+    cell.hit = True
     x = x * CELL_SIZE
     y = y * CELL_SIZE
     c.create_rectangle(x, y, 
@@ -82,6 +83,7 @@ def Update_Miss(m):
     x = m.x
     y = m.y
     cell = my_cells[x][y]
+    cell.hit = True
     x = x * CELL_SIZE
     y = y * CELL_SIZE
     c.create_line(x, y,
