@@ -43,10 +43,10 @@ class receiver:
 			print('received message: ', data)
 			m = message()
 			m.__dict__ = json.loads(data)
-			print(m)
+			return m
 		except:
 			print('no message received')
-			return
+			return None
 
 class sender:
 	def __init__(self, addr, port):

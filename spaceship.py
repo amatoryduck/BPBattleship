@@ -60,8 +60,28 @@ def After_Startup():
         return True
 
 def Recv():
-    RECV.receivePoll()
+    m = RECV.receivePoll()
+    if m != None:
+        if m.type == 1:
+            Update_Fire(m)
+    
     c.after(1000, Recv)
+
+def Update_Fire(msg):
+    x = msg.x
+    y = msg.y
+    cell = my_cells[x][y]
+    x = x * CELL_SIZE
+    y = y * CELL_SIZE
+    cell.hit = True
+    if cell.isShip:
+        c.create_rectangle(x, y + BOT_MAP_TOP, 
+        x + CELL_SIZE, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
+    else:
+        c.create_line(x, y + BOT_MAP_TOP,
+         x + CELL_SIZE, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
+        c.create_line(x + CELL_SIZE, y + BOT_MAP_TOP,
+         x, y + CELL_SIZE + BOT_MAP_TOP, fill = HIT_COLOR)
 
 ###############################################################################
 # ALL MATH FUNCTIONS LIVE HERE
@@ -108,6 +128,13 @@ def Find_My_Cell(point):
         for cell in i:
             (x,y) = Convert_To_Small(point[0], point[1])
             if x == cell.x and y == cell.y:
+                return cell
+    return None
+
+def Find_Cell_Index(point):
+    for i in my_cells:
+        for cell in i:
+            if cell.x == point[0] and cell.y == point[1]:
                 return cell
     return None
 
