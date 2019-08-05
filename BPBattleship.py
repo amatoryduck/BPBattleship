@@ -49,7 +49,8 @@ class Cell():
 ###############################################################################
 def After_Startup():
     global READY
-    #SEND.sendMessage(-1, -1, -1)
+    c.create_rectangle(0, WINDOW_WIDTH,
+     WINDOW_WIDTH, WINDOW_WIDTH + OFFSET, fill = OFFEST_COLOR)
     if SHIP_TO_BE_PLACED > 0:
         return False
     else:
@@ -187,13 +188,6 @@ def Can_Be_Placed(cells):
             return False
     return True
 
-def Draw_Ships_Left():
-    global SHIP_TO_BE_PLACED
-    c.create_rectangle(0, WINDOW_WIDTH,
-     WINDOW_WIDTH, WINDOW_WIDTH + OFFSET, fill = OFFEST_COLOR)
-    c.create_text(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, font="Arial",
-     text="YOU NEED TO PLACE {} MORE SHIPS".format(SHIP_TO_BE_PLACED))
-
 def Update_Cell(point):
     global SHIP_TO_BE_PLACED
     global READY
@@ -232,6 +226,13 @@ def Draw_Lines():
         BOT_MAP_TOP, i * CELL_SIZE, WINDOW_HEIGHT)
         c.create_line(0, (i * CELL_SIZE) + BOT_MAP_TOP, 
         WINDOW_WIDTH, (i * CELL_SIZE) + BOT_MAP_TOP)
+
+def Draw_Ships_Left():
+    global SHIP_TO_BE_PLACED
+    c.create_rectangle(0, WINDOW_WIDTH,
+     WINDOW_WIDTH, WINDOW_WIDTH + OFFSET, fill = OFFEST_COLOR)
+    c.create_text(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, font="Arial",
+     text="YOU NEED TO PLACE {} MORE SHIPS".format(SHIP_TO_BE_PLACED))
 
 ###############################################################################
 # HANDLE CLICK
